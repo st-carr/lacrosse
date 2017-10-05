@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+{% load staticfiles %}   
+<h1 class=mt-5>Men's Division One</h1>
+{% if league_list %}
+    <div class="row">
+        {% for league in league_list %}
+                <div class="col-sm-4">
+                <div class="card mt-2 d-flex align-items-center text-center">
+                    {% with 'rosters/'|add:league.name|add:'.png' as image_static %}
+                        <img class="card-img-top w-50 p-3" src="{% static image_static %}" alt="Card image cap">
+                    {% endwith %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ league.name }} League</h4>
+                        <a href="{% url 'league-list' league.division.name league.slug %}" class="m-1 btn btn-primary">View League</a>
+                    </div>
+                </div>
+                </div>
+
+                {% if forloop.counter|divisibleby:"3" and not forloop.last  %}
+                </div><div class="row">
+                {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No leagues passed.</p>
+{% endif %}
+{% endblock %}
+

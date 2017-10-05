@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+{% load staticfiles %}
+    <h1>{{ this_league }} League</h1>
+    {% if school_list %}
+    
+        <div class="row">
+            {% for school in school_list %}
+            <div class="col-sm-4">
+            <div class="card mt-2 d-flex align-items-center text-center" style="width: 20rem;">
+                {% with 'rosters/'|add:school.name|add:'.gif' as image_static %}
+                <img class="card-img-top w-50 p-3" src="{% static image_static %}" alt="Card image cap">
+                {% endwith %}
+                <div class="card-body">
+                    <h4 class="card-title ">{{ school.name }}</h4>
+                    <a href="{% url 'school-list' school.league.division.name school.league.slug school.slug %}" class="m-1 btn btn-primary">View Team</a>
+                </div>
+            </div>
+            </div>
+
+            {% if forloop.counter|divisibleby:"3" and not forloop.last  %}
+            </div><div class="row">
+            {% endif %}
+            {% endfor %}    
+        </div>
+
+
+    
+    {% endif %}
+
+
+
+{% endblock %}

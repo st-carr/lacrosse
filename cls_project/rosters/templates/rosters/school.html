@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+    <a href="{{ this_school.roster_website }}" target="_blank"><h1>{{ this_school.name }}</h1></a> 
+
+    {% if player_list %}
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>School</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Home State</th>
+                <th>Position</th>
+                <th>Height</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        {% for player in player_list %}
+        <tr>
+            <td>{{ player.number }}</td> 
+            <td>{{ player.school }}</td> 
+            <td>{{ player.name }}</td> 
+            <td>{{ player.get_year_display }}</td> 
+            <td>{{ player.state }}</td> 
+            <td>{{ player.get_position_display }}</td> 
+            <td>{{ player.height }} in.</td> 
+            <td>{{ player.weight }} lbs.</td> 
+        </tr>
+        {% endfor %}
+    
+    </table>
+
+    {% else %}
+        <p>There are no players in the model.</p>
+    {% endif %}
+
+{% endblock %}
