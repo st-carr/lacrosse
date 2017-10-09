@@ -9,25 +9,29 @@
         <thead>
             <tr>
                 <th>Number</th>
-                <th>School</th>
                 <th>Name</th>
                 <th>Class</th>
                 <th>Home State</th>
                 <th>Position</th>
                 <th>Height</th>
                 <th>Weight</th>
+                <th>Flag Data</th>
             </tr>
         </thead>
         {% for player in player_list %}
         <tr>
             <td>{{ player.number }}</td> 
-            <td>{{ player.school }}</td> 
             <td>{{ player.name }}</td> 
             <td>{{ player.get_year_display }}</td> 
             <td>{{ player.state }}</td> 
             <td>{{ player.get_position_display }}</td> 
             <td>{{ player.height }} in.</td> 
             <td>{{ player.weight }} lbs.</td> 
+            <td><a href="{% url 'flag-player' player.id %}" class="m-1 btn btn-outline-danger btn-sm">Flag</a></td> 
+
+            
+        
+
         </tr>
         {% endfor %}
     

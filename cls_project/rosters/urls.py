@@ -18,3 +18,7 @@ urlpatterns += [
 urlpatterns += [
     url(r'^m/(?P<division>[d][1-3])/(?P<league>[\w-]+)/(?P<school>[\w-]+)/$', views.SchoolView.as_view(), name='school-list'),
 ]
+
+urlpatterns += [
+    url(r'^flag-player/(?P<pk>[\d]+)/$', views.FlagPlayerDetailView.as_view(), name='flag-player'),
+]

@@ -70,8 +70,6 @@ class School(models.Model):
         """
         return self.name
 
-
-
 class League(models.Model):
     name = models.CharField(max_length=200)
     division = models.ForeignKey('Division', on_delete=models.SET_NULL, null=True)
@@ -96,3 +94,12 @@ class Division(models.Model):
         String for representing the Model object (in Admin site etc.)
         """
         return self.name
+
+class Data_Flag(models.Model):
+    player_instance = models.ForeignKey('Player', on_delete=models.SET_NULL, null=True)
+    user_instance = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user_report = models.TextField(max_length=1000)
+
+
+    class Meta:
+        permissions = (("can_flag_player", "Flag player roster data."),)

@@ -1,7 +1,23 @@
 from django.shortcuts import render
 from .models import Player, School, Division, League
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 # Create your views here.
+
+class FlagPlayerDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Player
+    template_name = 'rosters/flag_player.html'
+
+    
+    def get_context_data(self, **kwargs):
+        context = super(FlagPlayerDetailView, self).get_context_data(**kwargs)
+        context['player_list'] = Player.objects.get(id=self.kwargs['pk'])
+
+        return context 
+    
 
 
 class SchoolView(generic.ListView):
