@@ -1,5 +1,5 @@
 {% load socialaccount %}
-
+{% load static from staticfiles %}  
 {% get_providers as socialaccount_providers %}
 
 {% for provider in socialaccount_providers %}
@@ -13,8 +13,13 @@
 </li>
 {% endfor %}
 {% endif %}
-<li>
   <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
-     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
-</li>
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+    {% if provider.name == 'Google' %}
+      <img src="{% static 'social/google_btn_light_normal.png' %}" class="img-fluid" alt="Google sign in">  
+    {% else %}
+      {{provider.name}}
+    {% endif %}
+  </a>
 {% endfor %}
+

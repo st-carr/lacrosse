@@ -31,5 +31,9 @@
     {% else %}
         <p>There are no players in the model.</p>
     {% endif %}
-
+    <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+    </form>
 {% endblock %}

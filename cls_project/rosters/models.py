@@ -100,6 +100,5 @@ class Data_Flag(models.Model):
     user_instance = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     user_report = models.TextField(max_length=1000)
 
-
     class Meta:
         permissions = (("can_flag_player", "Flag player roster data."),)
