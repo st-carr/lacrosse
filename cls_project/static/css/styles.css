@@ -1,0 +1,21 @@
+.jumbotron {
+    background-color: #11ffee00; /* 00 - fully transparent */
+}
+
+th {
+    word-wrap:break-word;
+    word-break:break-all;
+}
+
+table {
+    table-layout:fixed;
+    width:100%;
+}
+
+#id_height, #id_weight, #id_number {
+    width: 75px;
+}
+
+#id_state, #id_name, #id_school, #id_position, #id_high_school, #id_hs_type, #id_city, #id_year {
+    width: 100px;
+}

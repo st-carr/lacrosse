@@ -85,7 +85,7 @@ def main():
         elif so_year:
             player_data["year"] = "so"
         elif jr_year:
-            player_data["year"] = "fr"
+            player_data["year"] = "jr"
         elif sr_year:
             player_data["year"] = "sr"
         else:

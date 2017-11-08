@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block title %}{% endblock %}
-{% load static from staticfiles %}  
+{% load static %} 
 {% block content %}
     <a href="{{ this_school.roster_website }}" target="_blank"><h1>{{ this_school.name }}</h1></a> 
-
+    {% if perms.rosters.can_edit_player %}
+        <a href="{% url 'add-player' this_school.slug %}" class="m-1 btn btn-outline-success btn-sm">Add Player</a>
+    {% endif %}
     {% if player_list %}
-    
-    <table class="table table-striped table-bordered">
+    <table id="myTable" class="tablesorter table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Number</th>
@@ -16,9 +17,14 @@
                 <th>Position</th>
                 <th>Height</th>
                 <th>Weight</th>
-                <th>Flag Data</th>
+                {% if perms.rosters.can_edit_player %}
+                    <th>Edit Player</th>
+                {% elif request.user.is_authenticated %}
+                    <th>Flag Player</th>
+                {% endif %}
             </tr>
         </thead>
+        <tbody>
         {% for player in player_list %}
         <tr>
             <td>{{ player.number }}</td> 
@@ -28,14 +34,15 @@
             <td>{{ player.get_position_display }}</td> 
             <td>{{ player.height }} in.</td> 
             <td>{{ player.weight }} lbs.</td> 
-            <td><a href="{% url 'flag-player' player.id %}" class="m-1 btn btn-outline-danger btn-sm">Flag</a></td> 
-
-            
-        
-
+            {% if perms.rosters.can_edit_player %}
+                <td><a href="{% url 'edit-player' player.id %}" class="m-1 btn btn-outline-danger btn-sm">Edit</a>
+                    <a href="{% url 'delete-player' player.id %}" class="m-1 btn btn-outline-danger btn-sm">Delete</a></td> 
+            {% elif request.user.is_authenticated %}
+                <td><a href="{% url 'flag-player' player.id %}" class="m-1 btn btn-outline-danger btn-sm">Flag</a></td> 
+            {% endif %}
         </tr>
         {% endfor %}
-    
+        </tbody>
     </table>
 
     {% else %}

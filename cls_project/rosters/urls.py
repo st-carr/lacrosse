@@ -20,5 +20,17 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url(r'^flag-player/(?P<pk>[\d]+)/$', views.FlagPlayerDetailView.as_view(), name='flag-player'),
+    url(r'^flag-player/(?P<pk>[\d]+)/$', views.flag_player_data, name='flag-player'),
+]
+
+urlpatterns += [
+    url(r'^edit-player/(?P<pk>[\d]+)/$', views.edit_player_data, name='edit-player'),
+]
+
+urlpatterns += [
+    url(r'^add-player/(?P<pk_school>[\w-]+)/$', views.add_player_data, name='add-player'),
+]
+
+urlpatterns += [
+    url(r'^delete-player/(?P<pk>[\d]+)/$', views.delete_player_data, name='delete-player'),
 ]

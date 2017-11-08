@@ -2,9 +2,9 @@
 {% block title %}{% endblock %}
 {% block content %}
 {% load static from staticfiles %}  
+    
     <h1>{{ this_league }} League</h1>
     {% if school_list %}
-    
         <div class="row">
             {% for school in school_list %}
             <div class="col-sm-4">
